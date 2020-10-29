@@ -1,6 +1,6 @@
 import React from 'react'
 import {Link, useParams} from 'react-router-dom'
-import Auth from './Auth'
+import Auth from '../auth'
 
 const LoggedIn = () => {
 
