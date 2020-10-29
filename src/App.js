@@ -9,9 +9,11 @@ import {
 import Main from './components/navigation/main'
 import LoggedIn from './components/navigation/logged.in'
 import Home from './components/pages/home'
+import Users from './components/pages/users'
 import AddNote from './components/pages/add.note'
 import Notes from './components/pages/notes'
 import NoteItem from './components/pages/note.item'
+import PrivateRoute from './components/config/private.route'
 
 const App = () => {
   return (
@@ -22,9 +24,6 @@ const App = () => {
           <Route path="/" exact>
             <Home />
           </Route>
-          <Route path="/notes">
-            <Notes />
-          </Route>
           <Route path="/new">
             <AddNote />
           </Route>
@@ -34,15 +33,10 @@ const App = () => {
           <Route path="/password">
             <div>Change Password</div>
           </Route>
-          <Route path="/:username">
-            <div>Profile</div>
-          </Route>
-          <Route path="/users">
-            <div></div>
-          </Route>
-          <Route path="/users/:id" exact>
-            <div></div>
-          </Route>
+          <PrivateRoute path="/notes" component={Notes} />
+          <PrivateRoute path="/users" component={Users} />
+          <PrivateRoute path="/users/:id" component={Notes} />
+
           <Route path="*">
             <div>Not Found</div>
           </Route>
@@ -52,6 +46,4 @@ const App = () => {
 }
 
 export default App
-
-
 

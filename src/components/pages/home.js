@@ -1,10 +1,12 @@
-import React from 'react'
+import React, {Button} from 'react'
 import {Link} from 'react-router-dom'
-import Auth from '../auth'
+import Auth from '../config/auth'
+
 const Home = () => {
     return (
         <div>
             <h1>Log in</h1>
+            <button onClick={()=>Auth.authenticate}>Log in</button>
             <div>
                 <input type="username" placeholder="Enter username" />
                 <input type="password" placeholder="Enter password" />

@@ -1,9 +1,6 @@
 import React, {useState, useEffect} from "react"
 import {Link} from 'react-router-dom'
-
-
-
-function Notes() {
+const Notes = () => {
     const [notes, setNotes] = useState([])
   
     let someId = 1
@@ -57,6 +54,6 @@ function Notes() {
         }
       </div>
     )
-  }
+}
 
 export default Notes
