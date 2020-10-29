@@ -1,7 +1,7 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 
-const MainNav = () => {
+const Main = () => {
     return (
         <div>
             <ul>
@@ -11,12 +11,9 @@ const MainNav = () => {
                 <li>
                     <Link to="/new">New</Link>
                 </li>
-                <li>
-                    <Link to="/notes/:noteid">Note</Link>
-                </li>
             </ul>
         </div>
     )
 }
 
-export default MainNav
+export default Main
