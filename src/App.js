@@ -5,10 +5,11 @@ import {
   Switch,
   Route
 } from 'react-router-dom'
+
 import PrivateRoute from './components/config/private.route'
 
 import Main from './components/navigation/main'
-import LoggedIn from './components/navigation/logged.in'
+import Account from './components/navigation/account'
 
 import Home from './components/pages/home'
 import ForgotPassword from './components/pages/forgot.password'
@@ -20,13 +21,14 @@ import Password from './components/pages/password'
 
 import AddNote from './components/pages/add.note'
 import Notes from './components/pages/notes'
-import NoteItem from './components/pages/note.item'
+import Note from './components/pages/note'
 
 const App = () => {
   return (
     <Router>
         <Main />
-        <LoggedIn />
+        <Account />
+
         <Switch>
 
           <Route path="/" exact>
@@ -37,13 +39,14 @@ const App = () => {
             <ForgotPassword />
           </Route>
 
-          <PrivateRoute path="/add/note" component={AddNote} />
-          <PrivateRoute path="/notes" component={Notes} />
-          <PrivateRoute path="/add/user" component={AddUser} />
+          <PrivateRoute path="/users/add" component={AddUser} />
           <PrivateRoute path="/users" component={Users} />
-          <PrivateRoute path="/users/:id" component={User} />
+          <PrivateRoute path="/users/:profile" component={User} />
           <PrivateRoute path="/password" component={Password} />
-          <PrivateRoute path="/notes/:noteid" component={NoteItem} />
+
+          <PrivateRoute path="/notes/add" component={AddNote} />
+          <PrivateRoute path="/notes" component={Notes} />
+          <PrivateRoute path="/notes/:note" component={Note} />
           
           <Route path="*">
             <div>Not Found</div>

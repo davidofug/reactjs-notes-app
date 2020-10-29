@@ -15,7 +15,7 @@ const Main = () => {
                     <Link to="/notes">Notes</Link>
                 </li>
                 <li>
-                    <Link to="/new">New</Link>
+                    <Link to="/notes/add">Add Note</Link>
                 </li>
                 </>)}
             </ul>

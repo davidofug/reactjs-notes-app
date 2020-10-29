@@ -4,16 +4,16 @@ import {
     useParams
 } from 'react-router-dom'
 
-const NoteItem = () => {
+const Note = () => {
 
     let match = useRouteMatch()
-    let { noteid } = useParams()
+    let { note } = useParams()
 
     return (
       <div>
-          {noteid}
+          {note}
       </div>
     )
 }
 
-export default NoteItem
+export default Note

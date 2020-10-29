@@ -2,7 +2,7 @@ import React from 'react'
 import {Link, useParams} from 'react-router-dom'
 import Auth from '../config/auth'
 
-const LoggedIn = () => {
+const Account = () => {
 
     const {username} = useParams()
 
@@ -12,6 +12,9 @@ const LoggedIn = () => {
                 <ul>
                     <li>
                         <Link to={'/users'}>Users</Link>
+                    </li>
+                    <li>
+                        <Link to={'/users/add'}>Users</Link>
                     </li>
                     <li>
                         <Link to={`/${username}`}>Profile</Link>
@@ -30,4 +33,4 @@ const LoggedIn = () => {
     )
 }
 
-export default LoggedIn
+export default Account
