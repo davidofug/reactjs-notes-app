@@ -10,7 +10,7 @@ import Main from './components/navigation/main'
 import LoggedIn from './components/navigation/logged.in'
 
 import Home from './components/pages/home'
-import SignUP from './components/pages/sign.up'
+import SignUP from './components/forms/sign.up'
 import ForgotPassword from './components/pages/forgot.password'
 import PrivateRoute from './components/config/private.route'
 
