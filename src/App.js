@@ -10,6 +10,7 @@ import Main from './components/navigation/main'
 import LoggedIn from './components/navigation/logged.in'
 import Home from './components/pages/home'
 import Users from './components/pages/users'
+import User from './components/pages/user'
 import AddNote from './components/pages/add.note'
 import Notes from './components/pages/notes'
 import NoteItem from './components/pages/note.item'
@@ -35,7 +36,7 @@ const App = () => {
           </Route>
           <PrivateRoute path="/notes" component={Notes} />
           <PrivateRoute path="/users" component={Users} />
-          <PrivateRoute path="/users/:id" component={Notes} />
+          <PrivateRoute path="/users/:id" component={User} />
 
           <Route path="*">
             <div>Not Found</div>

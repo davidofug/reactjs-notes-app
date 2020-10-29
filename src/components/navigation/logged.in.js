@@ -6,23 +6,27 @@ const LoggedIn = () => {
 
     const {username} = useParams()
 
-    return (
-        <div className="nav logged-in">
-            <ul>
-                <Link to={'users'}>
-                    <li>Users</li>
-                </Link>
-                <Link to={`/${username}`}>
-                    <li>Profile</li>
-                </Link>
-                <Link to={`/password`}>
-                    <li>Password</li>
-                </Link>
-               
-                <li onClick={()=> Auth.signout}>Log out</li>
-                
-            </ul>
-        </div>
+    return (<>
+        {Auth.getAuth() && (
+            <div className="nav logged-in">
+                <ul>
+                    <li>
+                        <Link to={'/users'}>Users</Link>
+                    </li>
+                    <li>
+                        <Link to={`/${username}`}>Profile</Link>
+                    </li>
+                    <li>
+                        <Link to={`/password`}>Password</Link>
+                    </li>
+
+                    <li onClick={()=> Auth.signout}>Log out</li>
+                    
+                </ul>
+            </div>
+        )
+        }
+        </>
     )
 }
 
