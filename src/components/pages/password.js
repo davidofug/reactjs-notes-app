@@ -1,8 +1,4 @@
 import React, {useState, useEffect} from 'react'
-import {
-    useRouteMatch,
-    useParams
-} from 'react-router-dom'
 
 const Password = () => {
 
@@ -13,4 +9,4 @@ const Password = () => {
     )
 }
 
-export default NoteItem
+export default Password
