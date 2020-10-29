@@ -43,9 +43,6 @@ const App = () => {
           <Route path="/users/:id" exact>
             <div></div>
           </Route>
-          <Route path="/logout">
-            <div>Logout</div>
-          </Route>
           <Route path="*">
             <div>Not Found</div>
           </Route>

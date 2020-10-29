@@ -1,5 +1,6 @@
 import React from 'react'
 import {Link, useParams} from 'react-router-dom'
+import Auth from './Auth'
 
 const LoggedIn = () => {
 
@@ -14,9 +15,9 @@ const LoggedIn = () => {
                 <Link to={`/password`}>
                     <li>Password</li>
                 </Link>
-                <Link to={`/logout`}>
-                    <li>Log out</li>
-                </Link>
+               
+                <li onClick={()=> Auth.signout}>Log out</li>
+                
             </ul>
         </div>
     )
