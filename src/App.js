@@ -17,6 +17,7 @@ import PrivateRoute from './components/config/private.route'
 import AddUser from './components/pages/add.user'
 import Users from './components/pages/users'
 import User from './components/pages/user'
+import Password from './components/pages/password'
 
 import AddNote from './components/pages/add.note'
 import Notes from './components/pages/notes'
@@ -46,6 +47,7 @@ const App = () => {
           <PrivateRoute path="/add/user" component={AddUser} />
           <PrivateRoute path="/users" component={Users} />
           <PrivateRoute path="/users/:id" component={User} />
+          <PrivateRoute path="/password" component={Password} />
           <PrivateRoute path="/notes/:noteid" component={NoteItem} />
 
         </Switch>
