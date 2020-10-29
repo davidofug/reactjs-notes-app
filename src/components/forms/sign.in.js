@@ -5,12 +5,9 @@ const SignIN = () => {
         <>
             <h1>Sign in </h1>
             <div>
-                <input type="text" placeholder="First name" />
-                <input type="text" placeholder="Last name" />
                 <input type="text" placeholder="Email" />
                 <input type="password" placeholder="Password..." />
-                <input type="password" placeholder="Confirm password..." />
-                <input type="submit" value="Register" />
+                <input type="submit" value="Sign in" />
             </div>
         </>
     )

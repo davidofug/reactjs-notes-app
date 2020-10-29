@@ -5,14 +5,13 @@ import {
   Switch,
   Route
 } from 'react-router-dom'
+import PrivateRoute from './components/config/private.route'
 
 import Main from './components/navigation/main'
 import LoggedIn from './components/navigation/logged.in'
 
 import Home from './components/pages/home'
-import SignUP from './components/forms/sign.up'
 import ForgotPassword from './components/pages/forgot.password'
-import PrivateRoute from './components/config/private.route'
 
 import AddUser from './components/pages/add.user'
 import Users from './components/pages/users'
@@ -29,15 +28,11 @@ const App = () => {
         <Main />
         <LoggedIn />
         <Switch>
-          <Route path="*">
-            <div>Not Found</div>
-          </Route>
+
           <Route path="/" exact>
             <Home />
           </Route>
-          <Route path="/sign-up">
-            <SignUP />
-          </Route>
+
           <Route path="/forgot-password">
             <ForgotPassword />
           </Route>
@@ -49,6 +44,10 @@ const App = () => {
           <PrivateRoute path="/users/:id" component={User} />
           <PrivateRoute path="/password" component={Password} />
           <PrivateRoute path="/notes/:noteid" component={NoteItem} />
+          
+          <Route path="*">
+            <div>Not Found</div>
+          </Route>
 
         </Switch>
     </Router>
