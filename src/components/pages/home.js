@@ -8,11 +8,7 @@ const Home = () => {
     return (
         <div>
             {
-               Auth.getAuth() ? (
-                   <Redirect to={{
-                        pathname: "/notes"
-                    }} />
-               ) :(
+               Auth.getAuth() ? <Redirect to={{pathname: "/notes"}} /> : (
                     <>
                     <SignIN />
                     <SignUP />
