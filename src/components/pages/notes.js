@@ -42,7 +42,7 @@ const Notes = () => {
         <h2>Your notes</h2>
         {notes &&
             notes.map( note => ( !note.archived && (
-                <div>
+                <div key={note.id}>
                     <Link to={`/notes/${note.id}`}>
                         <h1>{note.title}</h1>
                     </Link>

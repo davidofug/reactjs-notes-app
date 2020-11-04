@@ -5,8 +5,7 @@ import {
     Route
 } from 'react-router-dom'
 
-import Account from '../navigation/account'
-import Main from '../navigation/main'
+import MainNav from '../navigation/main'
 
 import PrivateRoute from './private.route'
 import Home from '../pages/home'
@@ -20,13 +19,13 @@ import Password from '../pages/password'
 import AddNote from '../pages/add.note'
 import Notes from '../pages/notes'
 import Note from '../pages/note'
+import Logout from '../pages/logout'
   
 const AppRouter = () => {
     return (
     <Router>
-        
-        <Account />
-        <Main />
+
+        <MainNav />
 
         <Switch>
 
@@ -46,6 +45,7 @@ const AppRouter = () => {
             <PrivateRoute path="/notes/add" component={AddNote} />
             <PrivateRoute path="/notes" component={Notes} />
             <PrivateRoute path="/notes/:note" component={Note} />
+            <PrivateRoute path="/logout" component={Logout} />
             
             <Route path="*">
                 <div>Not Found</div>
