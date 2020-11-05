@@ -14,23 +14,23 @@ const MainNav = () => {
                         <Link to={'/users'}>Users</Link>
                     </li>
                     <li>
-                        <Link to={'/users/add'}>Add User</Link>
-                    </li>
-                    <li>
-                        <Link to={`/${username}`}>Profile</Link>
-                    </li>
-                    <li>
-                        <Link to={`/password`}>Password</Link>
-                    </li>
-                    <li>
                         <Link to="/notes">Notes</Link>
                     </li>
                     <li>
-                        <Link to="/notes/add">Add Note</Link>
+                        <h4>My Account</h4>
+                        <ul>
+                            <li>
+                                <Link to={`users/${username}`}>Profile</Link>
+                            </li>
+                            <li>
+                                <Link to={`/password`}>Change password</Link>
+                            </li>
+                            <li>
+                                <Link to={'/logout'}>Log out</Link>
+                            </li>
+                        </ul>
                     </li>
-                    <li>
-                        <Link to={'/logout'}>Log out</Link>
-                    </li>
+
                 </ul>
             </div>
         )

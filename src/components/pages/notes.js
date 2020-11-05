@@ -1,45 +1,46 @@
-import React, {useState, useEffect} from "react"
+import * as React from "react"
 import {Link} from 'react-router-dom'
-const Notes = () => {
-    const [notes, setNotes] = useState([])
-  
-    let someId = 1
-  
-    useEffect( () => {
-    const ourFetch = () => {
-            return [
-              {
-                "id" : "445sffa",
-                "title": "Developing a react app",
-                "category": "Study",
-                "details": "Study how to use React to create apps",
-                "archived" : false
-              },
-              {
-                "id" : "425sfda",
-                "title": "Developing a react native app",
-                "category": "Work",
-                "details": "Swift gas and MobiKlinic apps",
-                "archived" : true
-              },
-              {
-                "id" : "345sfga",
-                "title": "Writing a manual",
-                "category": "Work",
-                "details": "write a Manual",
-                "archived" : false
-              }
-            ]
-        }
+import AddNote from './add.note'
 
-        const fetched = ourFetch()
-        setNotes(fetched)
+const Notes = () => {
+
+  const [notes, setNotes] = React.useState([])
   
-    },[someId])
-  
-    return (
+  React.useEffect( () => {
+    const fakeFetch = () => {
+      return [
+        {
+          "id" : "445sffa",
+          "title": "Developing a react app",
+          "category": "Study",
+          "details": "Study how to use React to create apps",
+          "archived" : false
+        },
+        {
+          "id" : "425sfda",
+          "title": "Developing a react native app",
+          "category": "Work",
+          "details": "Swift gas and MobiKlinic apps",
+          "archived" : true
+        },
+        {
+          "id" : "345sfga",
+          "title": "Writing a manual",
+          "category": "Work",
+          "details": "write a Manual",
+          "archived" : false
+        }
+      ]
+    }
+
+    setNotes(fakeFetch)
+
+  },[])
+
+  return (
+    <div>
+      <h2>Your notes</h2>
       <div>
-        <h2>Your notes</h2>
         {notes &&
             notes.map( note => ( !note.archived && (
                 <div key={note.id}>
@@ -53,7 +54,12 @@ const Notes = () => {
             )
         }
       </div>
-    )
+      <div>
+        <AddNote />
+      </div>
+
+    </div>
+  )
 }
 
 export default Notes

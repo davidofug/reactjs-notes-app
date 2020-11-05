@@ -1,5 +1,5 @@
 import * as React from 'react'
-import {Redirect} from 'react-router-dom'
+import {Link,Redirect} from 'react-router-dom'
 import Auth from '../config/auth'
 
 const SignIN = () => {
@@ -14,6 +14,7 @@ const SignIN = () => {
                 <input type="text" placeholder="Email" />
                 <input type="password" placeholder="Password..." />
                 <input type="submit" value="Sign in" onClick={() => sign()}/>
+                <p><Link to={'/forgot-password'}>Forgot Password?</Link></p>
             </div>
         </>
 }
