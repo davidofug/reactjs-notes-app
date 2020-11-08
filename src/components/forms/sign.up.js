@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Link } from 'react-router-dom'
-import {Submit, Half, TextInput } from '../ui/styles'
+import {Form, Error, Success, Submit, TextInput, Header, SmallContainer } from '../ui/styles'
 
 const SignUP = () => {
 
@@ -52,13 +52,13 @@ const SignUP = () => {
     }
 
     return (
-        <Half>
-            {errors.length > 0 && errors}
-            {success.length > 0 && success}
+        <SmallContainer>
 
-            <h1>Register</h1>
+            <Header>Register</Header>
 
-            <form method="post" onSubmit={handleSubmit}>
+            <Form method="post" onSubmit={handleSubmit}>
+                {errors.length > 0 && <Error>{errors}</Error>}
+                {success.length > 0 && <Success>{success}</Success>}
 
                 <TextInput
                     type="text" 
@@ -88,8 +88,8 @@ const SignUP = () => {
                 />
                 <p>Have an account? <Link to="/sign-in">Sign in</Link></p>
                 <Submit type="submit" value="Register" />
-            </form>
-        </Half>
+            </Form>
+        </SmallContainer>
     )
 }
 

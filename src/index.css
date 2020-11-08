@@ -1,3 +1,4 @@
+
 body {
   margin: 0;
   padding: 0;
@@ -7,12 +8,17 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  display:flex;
-  flex-direction: column;
-  
-
+  background: grey;
+  display: flex;
+  flex:1;
 
 }
+*,
+*::after,
+*::before{
+  box-sizing: inherit;
+}
+
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
@@ -21,6 +27,7 @@ code {
 
 #root {
   display: flex;
+  flex:1;
   flex-direction: column;
   justify-content: center;
   align-items: center;

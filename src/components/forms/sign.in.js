@@ -1,7 +1,7 @@
 import * as React from 'react'
 import {Link,Redirect} from 'react-router-dom'
 import Auth from '../config/auth'
-import {Half, Submit, TextInput}  from '../ui/styles'
+import {Form, Error, Header, SmallContainer, Submit, TextInput}  from '../ui/styles'
 
 const SignIN = () => {
 
@@ -24,9 +24,10 @@ const SignIN = () => {
     }
 
     return isAuth == 1 ? <Redirect to={{pathname: "/notes"}} /> : 
-        <Half>
-            <h1>Sign in</h1>
-            {error && <p>{error}</p>}
+        <SmallContainer>
+            <Header>Sign in</Header>
+            <Form>
+                {error && <Error>{error}</Error>}
                 <TextInput
                     type="text"
                     placeholder="Email" 
@@ -44,7 +45,8 @@ const SignIN = () => {
                 <p><Link to={'/forgot-password'}>Forgot Password?</Link></p>
 
                 <Submit type="submit" value="Sign in" onClick={sign}/>
-        </Half>
+            </Form>
+        </SmallContainer>
 }
 
 export default SignIN
