@@ -6,7 +6,7 @@ const Auth = {
 
     const users = JSON.parse(localStorage.getItem('users')) || []
 
-    const user = users.filter( user => (user.username === uname && user.password === pass) )
+    const user = users.filter( user => ((user.username === uname || user.email === uname ) && user.password === pass) )
 
     if( user.length > 0 ) {
 

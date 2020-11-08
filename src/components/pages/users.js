@@ -190,6 +190,7 @@ const Users = () => {
     const save = () => {
 
         const index = users.findIndex( auser => auser.id === user.id)
+
         if(index >= 0) {
             users[index] = user
         } else {
@@ -198,7 +199,8 @@ const Users = () => {
         }
 
         localStorage.setItem('users', JSON.stringify(users))
-
+        
+        return true
     }
 
     const userDetails = user_id => {
