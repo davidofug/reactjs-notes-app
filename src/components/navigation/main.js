@@ -1,7 +1,7 @@
 import React from 'react'
 import {Link, useParams} from 'react-router-dom'
 import Auth from '../config/auth'
-
+import {Logo} from '../ui/styles'
 const MainNav = () => {
 
     const {username} = useParams()
@@ -38,15 +38,7 @@ const MainNav = () => {
             </div>
         )
 
-    return (
-        <div className="nav">
-            <ul>
-                <li>
-                    <Link to="/">Sign in/Signup</Link>
-                </li>
-            </ul>
-        </div>
-    )
+    return <></>
 }
 
 export default MainNav

@@ -8,7 +8,8 @@ import {
 import MainNav from '../navigation/main'
 
 import PrivateRoute from './private.route'
-import Home from '../pages/home'
+import SignIN from '../forms/sign.in'
+import SignUP from '../forms/sign.up'
 import ForgotPassword from '../pages/forgot.password'
 
 import AddUser from '../pages/add.user'
@@ -33,11 +34,19 @@ const AppRouter = () => {
         <Switch>
 
             <Route exact strict path="/" >
-                <Home />
+                <SignIN />
+            </Route>
+            
+            <Route exact strict path="/sign-in" >
+                <SignIN />
             </Route>
 
             <Route path="/forgot-password">
                 <ForgotPassword />
+            </Route>
+
+            <Route path="/sign-up">
+                <SignUP />
             </Route>
 
             <PrivateRoute path='/users/:profile' component={User} />

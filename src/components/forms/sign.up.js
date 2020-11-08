@@ -1,4 +1,6 @@
 import * as React from 'react'
+import { Link } from 'react-router-dom'
+import {Submit, Half, TextInput } from '../ui/styles'
 
 const SignUP = () => {
 
@@ -50,7 +52,7 @@ const SignUP = () => {
     }
 
     return (
-        <>
+        <Half>
             {errors.length > 0 && errors}
             {success.length > 0 && success}
 
@@ -58,35 +60,36 @@ const SignUP = () => {
 
             <form method="post" onSubmit={handleSubmit}>
 
-                <input
+                <TextInput
                     type="text" 
                     placeholder="Full name" 
                     value={user.fullname}
                     onChange={ e => setUser({...user, fullname: e.target.value})}
                 />
 
-                <input 
+                <TextInput 
                     type="text" 
                     placeholder="Email"
                     value={user.email}
                     onChange={ e => setUser({...user, email: e.target.value})}
                 />
 
-                <input 
+                <TextInput 
                     type="password" 
                     placeholder="Password..."
                     value={user.password}
                     onChange={ e => setUser({...user, password: e.target.value})}
                 />
-                <input 
+                <TextInput
                     type="password" 
                     placeholder="Confirm password..."
                     value={user.password2}
                     onChange={ e => setUser({...user, password2: e.target.value})}
                 />
-                <input type="submit" value="Register" />
+                <p>Have an account? <Link to="/sign-in">Sign in</Link></p>
+                <Submit type="submit" value="Register" />
             </form>
-        </>
+        </Half>
     )
 }
 

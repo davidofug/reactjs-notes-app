@@ -1,6 +1,7 @@
 import * as React from 'react'
 import {Link,Redirect} from 'react-router-dom'
 import Auth from '../config/auth'
+import {Half, Submit, TextInput}  from '../ui/styles'
 
 const SignIN = () => {
 
@@ -23,27 +24,27 @@ const SignIN = () => {
     }
 
     return isAuth == 1 ? <Redirect to={{pathname: "/notes"}} /> : 
-        <>
-            <h1>Sign in </h1>
+        <Half>
+            <h1>Sign in</h1>
             {error && <p>{error}</p>}
-            <div>
-                <input
+                <TextInput
                     type="text"
                     placeholder="Email" 
                     onChange={ e => setCreds({...creds, username: e.target.value })}
                     value={creds.username}
                 />
 
-                <input
+                <TextInput
                     type="password"
                     placeholder="Password..."
                     value={creds.password}
                     onChange={ e => setCreds({...creds, password: e.target.value})}
                 />
-                <input type="submit" value="Sign in" onClick={sign}/>
+                <p>Don't have an account? <Link to="/sign-up">Sign up</Link></p>
                 <p><Link to={'/forgot-password'}>Forgot Password?</Link></p>
-            </div>
-        </>
+
+                <Submit type="submit" value="Sign in" onClick={sign}/>
+        </Half>
 }
 
 export default SignIN
