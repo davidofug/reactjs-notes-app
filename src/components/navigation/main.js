@@ -11,10 +11,13 @@ const MainNav = () => {
             <div className="nav logged-in">
                 <ul>
                     <li>
-                        <Link to={'/users'}>Users</Link>
+                        <Link to="/users">Users</Link>
                     </li>
                     <li>
                         <Link to="/notes">Notes</Link>
+                    </li>
+                    <li>
+                        <Link to="/tasks">Tasks</Link>
                     </li>
                     <li>
                         <h4>My Account</h4>
@@ -23,10 +26,10 @@ const MainNav = () => {
                                 <Link to={`users/${username}`}>Profile</Link>
                             </li>
                             <li>
-                                <Link to={`/password`}>Change password</Link>
+                                <Link to="/password">Change password</Link>
                             </li>
                             <li>
-                                <Link to={'/logout'}>Log out</Link>
+                                <Link to="/logout">Log out</Link>
                             </li>
                         </ul>
                     </li>

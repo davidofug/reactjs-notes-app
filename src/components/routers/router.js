@@ -19,6 +19,9 @@ import Password from '../pages/password'
 import AddNote from '../pages/add.note'
 import Notes from '../pages/notes'
 import Note from '../pages/note'
+
+import Tasks from '../pages/tasks'
+
 import Logout from '../pages/logout'
   
 const AppRouter = () => {
@@ -29,7 +32,7 @@ const AppRouter = () => {
 
         <Switch>
 
-            <Route path="/" exact>
+            <Route exact strict path="/" >
                 <Home />
             </Route>
 
@@ -37,14 +40,17 @@ const AppRouter = () => {
                 <ForgotPassword />
             </Route>
 
+            <PrivateRoute path='/users/:profile' component={User} />
             <PrivateRoute path="/users/add" component={AddUser} />
             <PrivateRoute path="/users" component={Users} />
-            <PrivateRoute path="/users/:profile" component={User} />
             <PrivateRoute path="/password" component={Password} />
 
+            <PrivateRoute path="/notes/:note" component={Note} />
             <PrivateRoute path="/notes/add" component={AddNote} />
             <PrivateRoute path="/notes" component={Notes} />
-            <PrivateRoute path="/notes/:note" component={Note} />
+
+            <PrivateRoute path="/tasks" component={Tasks} />
+
             <PrivateRoute path="/logout" component={Logout} />
             
             <Route path="*">

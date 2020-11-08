@@ -1,21 +1,41 @@
 
 const Auth = {
   isAuthenticated: false,
-  authenticate() {
+  authenticate(uname, pass) {
     this.isAuthenticated = true
-    localStorage.setItem('user', JSON.stringify({'isAuthenticated': 1}))
-    return this.getAuth() ? true : false
+
+    const users = JSON.parse(localStorage.getItem('users')) || []
+
+    const user = users.filter( user => (user.username === uname && user.password === pass) )
+
+    if( user.length > 0 ) {
+
+      const {username, fullname, password } = user[0]
+
+      const authenticated = {
+        'authenticated': this.isAuthenticated,
+        'uname': username,
+        'fullname': fullname,
+        'password': password
+      }
+
+      localStorage.setItem('user', JSON.stringify(authenticated) )
+
+      return this.getAuth() ? true : false
+    } else {
+      return false
+    }
   },
   signout() {
     this.isAuthenticated = false
     const user  = JSON.parse(localStorage.getItem('user')) || false
-    user.isAuthenticated = user ? 0 : null
-    localStorage.setItem('user', JSON.stringify({user}))
-    return !this.isAuthenticated ? true : false
+    user.authenticated = user ? 0 : null
+    localStorage.setItem('user', JSON.stringify(user))
+    return this.isAuthenticated
   },
   getAuth() {
     const user = JSON.parse(localStorage.getItem('user')) || false
-    this.isAuthenticated = user.isAuthenticated ? user.isAuthenticated : this.isAuthenticated
+    this.isAuthenticated = user.authenticated ? user.authenticated : false
     return this.isAuthenticated
   }
 }

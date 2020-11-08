@@ -3,9 +3,10 @@ import {Route, Redirect} from 'react-router-dom'
 import Auth from '../config/auth'
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
-  <Route {...rest}>
-    {Auth.getAuth() ? <Component {...rest} /> : <Redirect to={{pathname: "/"}}/>}
-  </Route>
-)
+  <Route {...rest} component={(props) => 
+    Auth.getAuth() ? (<Component {...props} />) 
+    : (<Redirect to={{pathname: "/"}}/>)} 
+  />
+) 
 
 export default PrivateRoute
