@@ -14,6 +14,12 @@ export const dimens = {
     xs: '5px'
 }
 
+export const CustomStyles = createGlobalStyle`
+    .completed {
+        background-color: ${color.success};
+        color: ${color.white};
+    }
+`
 export const GlobalStyle = createGlobalStyle`
     body {
         margin: 0;

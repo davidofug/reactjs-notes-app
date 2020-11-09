@@ -6,7 +6,7 @@ import Card from 'react-bootstrap/Card'
 
 const Tasks = () => {
 
-    const [tasks, setTasks] = React.useState([])
+    let [tasks, setTasks] = React.useState([])
     const [task, setNewTask] = React.useState({
         id: '',
         title: '',
@@ -40,7 +40,6 @@ const Tasks = () => {
     const save = () => {
 
         const index = tasks.findIndex( atask => atask.id === task.id)
-        let newTasks = []
         if(index >= 0) {
             tasks[index] = task
         } else {
@@ -48,40 +47,39 @@ const Tasks = () => {
             const date = new Date(timestamp)
             task.id = timestamp
             task.date = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
-            newTasks = [...tasks,task]
+            tasks = [...tasks,task]
         }
 
-        localStorage.setItem('tasks', JSON.stringify(newTasks))
+        localStorage.setItem('tasks', JSON.stringify(tasks))
         
         return true
 
-  }
+    }
 
     const complete = id => {
-        const tasks = JSON.parse(localStorage.getItem('tasks')) || []
-        const task = tasks.filter( atask => String(atask.id) === id)[0]
-        let complete = {...task, status: true}
-        console.log(complete)
-        setNewTask({
-            id: complete.id,
-            title: complete.title,
-            details: complete.details,
-            status: complete.status,
-            date: complete.date
-        })
+        const task = tasks.filter( atask => atask.id === id)[0]
+        let completed = {...task, status: true}
+        const index = tasks.findIndex( atask => atask.id === completed.id)
+
+        if(index >= 0) {
+            tasks[index] = completed
+            localStorage.setItem('tasks', JSON.stringify(tasks))
+        }
+
+        getTasks()
+
     }
 
     const remove = id => {
         const tasks = JSON.parse(localStorage.getItem('tasks')) || []
-        const remaining = tasks.filter( task => String(task.id) !== id )
+        const remaining = tasks.filter( task => task.id !== id )
         setTasks(remaining)
         localStorage.setItem('tasks', JSON.stringify(remaining) )
     }
 
     const edit = id => {
         const tasks = JSON.parse(localStorage.getItem('tasks')) || []
-        const task = tasks.filter( atask => String(atask.id) === id)[0]
-
+        const task = tasks.filter( atask => atask.id === id)[0]
         setFormTitle('Update')
 
         setNewTask({
@@ -92,20 +90,26 @@ const Tasks = () => {
     }
 
     const taskItems = tasks.length > 0 && (
-        <Accordion defaultActiveKey="0">
+        <Accordion defaultActiveKey={tasks[0].id}>
             {tasks.map( task => 
                 (
                     <Card key={task.id}>
-                        <Card.Header>
+                        <Card.Header className={task.status === true && 'completed'}>
                             <Accordion.Toggle as={Button} variant="link" eventKey={task.id}>
                                 {task.title} <i>{task.date}</i>
                             </Accordion.Toggle>
-                            <Button onClick={()=>remove(task.id)}>Delete</Button>{" "}
-                            <span onClick={() => edit( task.id )}>Edit</span>{' '}
-                            <span onClick={() => complete( task.id )}>Finish</span>
+                            
+                            {task.status === true ? null : <Button variant="success" onClick={() => complete( task.id )}>Finish</Button>}
                         </Card.Header>
                         <Accordion.Collapse eventKey={task.id}>
-                            <Card.Body>{task.details}</Card.Body>
+                            <Card.Body>
+                                {task.details}
+                                <div>
+                                <Button variant="danger" onClick={()=>remove(task.id)}>Delete</Button>{" "}
+                                {task.status === true ? null :<Button variant="primary" onClick={() => edit( task.id )}>Edit</Button>}
+                                </div>
+                            </Card.Body>
+
                         </Accordion.Collapse>
                     </Card>
                 )
@@ -134,12 +138,10 @@ const Tasks = () => {
                     />
                 </Form.Group>
                 <Form.Group>
-                    <Button variant="primary" type="submit" >Save</Button>
+                    <Button variant="primary" type="submit">Save</Button>
                 </Form.Group>
             </Form>
-            
             {taskItems}
-            
         </>
     )
 }

@@ -28,12 +28,12 @@ import Note from '../pages/note'
 import Tasks from '../pages/tasks'
 
 import Logout from '../pages/logout'
-import { GlobalStyle } from '../ui/styles'
+import { CustomStyles } from '../ui/styles'
   
 const AppRouter = () => {
     return (
     <Router>
-        {/* <GlobalStyle /> */}
+        <CustomStyles />
         <Container fluid>
             <MainNav />
         </Container>
