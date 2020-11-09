@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, {createGlobalStyle} from 'styled-components'
 
 export const color = {
     accent: '#5182f5',
@@ -13,6 +13,41 @@ export const dimens = {
     sm: '10px',
     xs: '5px'
 }
+
+export const GlobalStyle = createGlobalStyle`
+    body {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+        'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+        sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        background: grey;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    *,
+    *::after,
+    *::before{
+        box-sizing: inherit;
+    }
+    
+    code {
+        font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+        monospace;
+    }
+    
+    #root {
+        display: flex;
+        flex:1;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+` 
 
 export const Wrapper = styled.section`
     display: grid;

@@ -5,6 +5,10 @@ import {
     Route
 } from 'react-router-dom'
 
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
+
 import MainNav from '../navigation/main'
 
 import PrivateRoute from './private.route'
@@ -24,49 +28,56 @@ import Note from '../pages/note'
 import Tasks from '../pages/tasks'
 
 import Logout from '../pages/logout'
+import { GlobalStyle } from '../ui/styles'
   
 const AppRouter = () => {
     return (
     <Router>
+        {/* <GlobalStyle /> */}
+        <Container>
+            <Row>
+                <Col sm={3}>
+                    <MainNav />
+                </Col>
+                <Col sm={9}>
+                    <Switch>
+                        <Route exact strict path="/" >
+                            <SignIN />
+                        </Route>
 
-        <MainNav />
+                        <Route exact strict path="/sign-in" >
+                            <SignIN />
+                        </Route>
 
-        <Switch>
+                        <Route path="/forgot-password">
+                            <ForgotPassword />
+                        </Route>
 
-            <Route exact strict path="/" >
-                <SignIN />
-            </Route>
-            
-            <Route exact strict path="/sign-in" >
-                <SignIN />
-            </Route>
+                        <Route path="/sign-up">
+                            <SignUP />
+                        </Route>
 
-            <Route path="/forgot-password">
-                <ForgotPassword />
-            </Route>
+                        <PrivateRoute path='/users/:profile' component={User} />
+                        <PrivateRoute path="/users/add" component={AddUser} />
+                        <PrivateRoute path="/users" component={Users} />
+                        <PrivateRoute path="/password" component={Password} />
 
-            <Route path="/sign-up">
-                <SignUP />
-            </Route>
+                        <PrivateRoute path="/notes/:note" component={Note} />
+                        <PrivateRoute path="/notes/add" component={AddNote} />
+                        <PrivateRoute path="/notes" component={Notes} />
 
-            <PrivateRoute path='/users/:profile' component={User} />
-            <PrivateRoute path="/users/add" component={AddUser} />
-            <PrivateRoute path="/users" component={Users} />
-            <PrivateRoute path="/password" component={Password} />
+                        <PrivateRoute path="/tasks" component={Tasks} />
 
-            <PrivateRoute path="/notes/:note" component={Note} />
-            <PrivateRoute path="/notes/add" component={AddNote} />
-            <PrivateRoute path="/notes" component={Notes} />
+                        <PrivateRoute path="/logout" component={Logout} />
+                        
+                        <Route path="*">
+                            <div>Not Found</div>
+                        </Route>
 
-            <PrivateRoute path="/tasks" component={Tasks} />
-
-            <PrivateRoute path="/logout" component={Logout} />
-            
-            <Route path="*">
-                <div>Not Found</div>
-            </Route>
-
-        </Switch>
+                    </Switch>                
+                </Col>
+            </Row>
+        </Container>
     </Router>
     )
 }

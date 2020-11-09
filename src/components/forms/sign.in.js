@@ -30,7 +30,7 @@ const SignIN = () => {
                 {error && <Error>{error}</Error>}
                 <TextInput
                     type="text"
-                    placeholder="Email" 
+                    placeholder="Email/Username/Phone" 
                     onChange={ e => setCreds({...creds, username: e.target.value })}
                     value={creds.username}
                 />
