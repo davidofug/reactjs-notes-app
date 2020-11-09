@@ -34,12 +34,13 @@ const AppRouter = () => {
     return (
     <Router>
         {/* <GlobalStyle /> */}
+        <Container fluid>
+            <MainNav />
+        </Container>
+
         <Container>
             <Row>
-                <Col sm={3}>
-                    <MainNav />
-                </Col>
-                <Col sm={9}>
+                <Col>
                     <Switch>
                         <Route exact strict path="/" >
                             <SignIN />

@@ -1,13 +1,20 @@
 import * as React from 'react'
 import {Link} from 'react-router-dom'
+import Container from 'react-bootstrap/Container'
+import Table from 'react-bootstrap/Table'
+import Button from 'react-bootstrap/Button'
+import Form from 'react-bootstrap/Form'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 
 const ListUsers = ({addUser, users,remove, edit, userDetails}) => {
     return (
         <>
-            <h1>Users <button onClick={addUser}>Add</button></h1>
+            <h1>Users</h1>
+            {/* <h1>Users <Button variant="dark" onClick={addUser}>Add</Button></h1> */}
             {users.length > 0 &&
                 <div>
-                    <table>
+                    <Table striped bordered hover>
                         <thead>
                             <tr>
                                 <th>Username</th>
@@ -57,7 +64,7 @@ const ListUsers = ({addUser, users,remove, edit, userDetails}) => {
                                 <th></th>
                             </tr>
                         </tfoot>
-                    </table> 
+                    </Table> 
                 </div>
             }
         </>
@@ -68,58 +75,73 @@ const ListUsers = ({addUser, users,remove, edit, userDetails}) => {
 const TheForm = ({formTitle, save, user, setUser}) => {
     return (
         <>
-            <div>{formTitle} a user</div>
+            <h1>{formTitle} a user</h1>
 
-            <form method="post" onSubmit={save}>
+            <Form method="post" onSubmit={save}>
                 <input 
                     type="hidden"
                     value={user.id} 
                 />
-                <label>
-                    Username <input type="text" 
-                    placeholder="Username"
-                    onChange={e => setUser({...user, username: e.target.value})}
-                    value={user.username}
+                <Form.Group>
+                    <Form.Label>Username </Form.Label>
+                    <Form.Control 
+                        type="text" 
+                        placeholder="Username"
+                        onChange={e => setUser({...user, username: e.target.value})}
+                        value={user.username}
                     />
-                </label>
-                <label>
-                    Full Name  <input type="text" 
-                    placeholder="Full Name"
-                    onChange={e => setUser({...user, fullname: e.target.value})}
-                    value={user.fullname}
+                </Form.Group>
+
+                <Form.Group>
+                    <Form.Label>Full Name</Form.Label>
+                    <Form.Control type="text" 
+                        placeholder="Full Name"
+                        onChange={e => setUser({...user, fullname: e.target.value})}
+                        value={user.fullname}
                     />
-                </label>
-                <label>
-                    E-mail <input type="email" 
-                    placeholder="E-mail"
-                    onChange={e => setUser({...user, email: e.target.value})}
-                    value={user.email}
+                </Form.Group>
+                
+                <Form.Group>
+                    <Form.Label>E-mail </Form.Label>
+                    <Form.Control type="email" 
+                        placeholder="E-mail"
+                        onChange={e => setUser({...user, email: e.target.value})}
+                        value={user.email}
                     />
-                </label>
-                <label>
-                    Phone <input type="phone" 
-                    placeholder="Phone"
-                    onChange={e => setUser({...user, phone: e.target.value})}
-                    value={user.phone}
+                    <Form.Text className="text-muted">We'll never share your email with anyone else.</Form.Text>
+                </Form.Group>
+
+                <Form.Group>
+                    <Form.Label>Phone</Form.Label>
+                    <Form.Control
+                        type="phone" 
+                        placeholder="Phone"
+                        onChange={e => setUser({...user, phone: e.target.value})}
+                        value={user.phone}
                     />
-                </label>
-                <label>
-                    Password <input type="password" 
+                </Form.Group>
+                
+                <Form.Group>
+                    <Form.Label>Password </Form.Label>
+                    <Form.Control type="password" 
                     placeholder="Password"
                     onChange={e => setUser({...user, password: e.target.value})}
                     value={user.password}
                     />
-                </label>
-                <label>
-                    Confirm Password <input type="password" 
-                    placeholder="Confirm Password"
-                    onChange={e => setUser({...user, password2: e.target.value})}
-                    value={user.password2}
-                    />
-                </label>
+                </Form.Group>
 
-                <input type="submit" value="Save" />
-            </form>
+                <Form.Group>
+                    <Form.Label>Confirm Password</Form.Label>
+                    <Form.Control
+                        type="password" 
+                        placeholder="Confirm Password"
+                        onChange={e => setUser({...user, password2: e.target.value})}
+                        value={user.password2}
+                    />
+                </Form.Group>
+
+                <Button variant="primary" type="submit" >Submit</Button>
+            </Form>
         </>
     )
 }
@@ -145,7 +167,6 @@ const Users = () => {
 
     let [users, setUsers] = React.useState([])
     let [formTitle, setTitle] = React.useState('Add')
-    let [formStatus,setStatus] = React.useState(false)
     
     let [user, setUser] = React.useState({
         id:'',
@@ -177,14 +198,13 @@ const Users = () => {
             password2: ''
         })
         setTitle('Add')
-        setStatus(true)
+
     }
 
     const handleSubmit = e => {
         e.preventDefault()
         save()
         getUsers()
-        setStatus(false)
     }
 
     const save = () => {
@@ -210,7 +230,6 @@ const Users = () => {
     }
 
     const edit = user_id => {
-        setStatus(true)
         const getUser = users.filter( user => user.id === user_id )
         const update = getUser[0]
         setTitle('Update')
@@ -230,22 +249,27 @@ const Users = () => {
             />
 
     return (
-        <div>
-            <ListUsers
-                addUser={addUser}
-                users={users}
-                remove={remove}
-                edit={edit}
-                userDetails={userDetails}
-            />
-
-            {formStatus && <TheForm
-                formTitle={formTitle}
-                save={handleSubmit}
-                user={user}
-                setUser={setUser} 
-            />}
-        </div>
+        <Row>
+            <Col sm={8}>
+                <ListUsers
+                    addUser={addUser}
+                    users={users}
+                    remove={remove}
+                    edit={edit}
+                    userDetails={userDetails}
+                />
+            </Col>
+            <Col sm={4}>
+                <Container>
+                    <TheForm
+                        formTitle={formTitle}
+                        save={handleSubmit}
+                        user={user}
+                        setUser={setUser} 
+                    />
+                </Container>
+            </Col>
+        </Row>
     )
 }
 
