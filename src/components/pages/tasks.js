@@ -1,89 +1,145 @@
 import * as React from 'react'
+import Form  from 'react-bootstrap/Form'
+import Button  from 'react-bootstrap/Button'
+import Accordion from 'react-bootstrap/Accordion'
+import Card from 'react-bootstrap/Card'
 
 const Tasks = () => {
 
     const [tasks, setTasks] = React.useState([])
-    const [newTask, setNewTask] = React.useState({
+    const [task, setNewTask] = React.useState({
+        id: '',
         title: '',
-        details: ''
+        details: '',
+        date: ''
     })
 
+    const [formTitle, setFormTitle] = React.useState('Add New')
+
+    const getTasks = () => {
+        setTasks(JSON.parse( localStorage.getItem('tasks') ) || [])
+    }
+
     React.useEffect(() => {
-        let taskItems = JSON.parse(localStorage.getItem('tasks')) || []
-        setTasks(taskItems)
+        getTasks()
     },[])
+
+    const handleSubmit = e => {
+        e.preventDefault()
+        save()
+        getTasks()
+        setNewTask({
+            id:'',
+            title: '',
+            details: '',
+            date:''
+        })
+
+    }
 
     const save = () => {
 
-        const timestamp = Date.now()
-        const date = new Date(timestamp)
-        const dateFormat = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
+        const index = tasks.findIndex( atask => atask.id === task.id)
+        let newTasks = []
+        if(index >= 0) {
+            tasks[index] = task
+        } else {
+            const timestamp = Date.now()
+            const date = new Date(timestamp)
+            task.id = timestamp
+            task.date = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
+            newTasks = [...tasks,task]
+        }
+
+        localStorage.setItem('tasks', JSON.stringify(newTasks))
         
-        tasks.push({
-            'id': String(timestamp),
-            'title': newTask.title,
-            'details': newTask.details,
-            'date': dateFormat
-        })
+        return true
 
-        localStorage.setItem('tasks', JSON.stringify(tasks))
+  }
+
+    const complete = id => {
+        const tasks = JSON.parse(localStorage.getItem('tasks')) || []
+        const task = tasks.filter( atask => String(atask.id) === id)[0]
+        let complete = {...task, status: true}
+        console.log(complete)
         setNewTask({
-            title:'',
-            details: ''
+            id: complete.id,
+            title: complete.title,
+            details: complete.details,
+            status: complete.status,
+            date: complete.date
         })
     }
 
-    const complete = e => {
-        const {id} = e.target.parentElement
-        console.log('Task Completed')
+    const remove = id => {
+        const tasks = JSON.parse(localStorage.getItem('tasks')) || []
+        const remaining = tasks.filter( task => String(task.id) !== id )
+        setTasks(remaining)
+        localStorage.setItem('tasks', JSON.stringify(remaining) )
     }
 
-    const remove = e => {
-        const {id} = e.target.parentElement
-        const title = e.target.parentElement.childNodes[0].innerText
+    const edit = id => {
+        const tasks = JSON.parse(localStorage.getItem('tasks')) || []
+        const task = tasks.filter( atask => String(atask.id) === id)[0]
 
-        alert(`Are you sure ${title}`)
+        setFormTitle('Update')
+
+        setNewTask({
+            id: task.id,
+            title: task.title,
+            details: task.details
+        })
     }
 
-    const edit = e => {
-        const {id} = e.target.parentElement
-        console.log(id)
-        alert('You will edit')
-    }
-
-    const listItems = tasks.length > 0 && (
-        tasks.map( task => 
-            (
-                <li key={task.id} id={task.id}>
-                    <b onClick={complete}>{task.title}</b> <i>{task.date}</i> {" "}
-                    <span onClick={remove}>Delete</span>{" "}
-                    <span onClick={edit}>Edit</span><br/>
-                    <p>{task.details}</p>
-                </li>
-            )
-        )
+    const taskItems = tasks.length > 0 && (
+        <Accordion defaultActiveKey="0">
+            {tasks.map( task => 
+                (
+                    <Card key={task.id}>
+                        <Card.Header>
+                            <Accordion.Toggle as={Button} variant="link" eventKey={task.id}>
+                                {task.title} <i>{task.date}</i>
+                            </Accordion.Toggle>
+                            <Button onClick={()=>remove(task.id)}>Delete</Button>{" "}
+                            <span onClick={() => edit( task.id )}>Edit</span>{' '}
+                            <span onClick={() => complete( task.id )}>Finish</span>
+                        </Card.Header>
+                        <Accordion.Collapse eventKey={task.id}>
+                            <Card.Body>{task.details}</Card.Body>
+                        </Accordion.Collapse>
+                    </Card>
+                )
+            )}
+        </Accordion>
     )
 
     return (
         <>
-            <header>
-                <input type="text" 
-                    onChange={e => setNewTask({...newTask,title:e.target.value})}
-                    value={newTask.title}
-                    placeholder={'Enter item title'}
-                /><br/>
-                <textarea
-                    placeholder="Type the item and click save..." 
-                    onChange={e => setNewTask({...newTask,details:e.target.value})}
-                    value={newTask.details}
-                ></textarea>
-                <br/>
-                <button onClick={save}>Save</button>
-            </header>
+            <h1>{formTitle} Task</h1>
+            <Form method="post" onSubmit={handleSubmit}>
+                <Form.Group>
+                    <Form.Control
+                        type="text" 
+                        onChange={e => setNewTask({...task, title:e.target.value})}
+                        value={task.title}
+                        placeholder={'Task title'}
+                    />
+                </Form.Group>
+                <Form.Group>
+                    <Form.Control
+                        as="textarea"
+                        placeholder="Describe task" 
+                        onChange={e => setNewTask({...task, details:e.target.value})}
+                        value={task.details}
+                    />
+                </Form.Group>
+                <Form.Group>
+                    <Button variant="primary" type="submit" >Save</Button>
+                </Form.Group>
+            </Form>
             
-            <ul>
-                {listItems}
-            </ul>
+            {taskItems}
+            
         </>
     )
 }
