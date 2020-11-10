@@ -1,64 +1,72 @@
 import * as React from "react"
-import {Link} from 'react-router-dom'
 import AddNote from './add.note'
+import CardColumns from 'react-bootstrap/CardColumns'
+import CardDeck from 'react-bootstrap/CardDeck'
+import Card from 'react-bootstrap/Card'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
+import { CardGroup } from "react-bootstrap"
+
+const NotesItems = ({notes}) => {
+
+  return (notes.length && (
+    <CardColumns>
+      <h1></h1>
+      { 
+        notes.map( note => (
+        <Card
+          bg='info'
+          key={note.id}
+          text='white'
+          style={{width:'250px'}}
+          >
+          <Card.Header>{note.title}</Card.Header>
+          <Card.Body>
+            <Card.Title>{note.title}</Card.Title>
+            <Card.Text>
+              {note.body}
+            </Card.Text>
+          </Card.Body>
+          <Card.Footer>
+            {/* <small className="text-muted">dates</small> */}
+            <small>dates</small>
+          </Card.Footer>
+        </Card>
+        ))}
+    </CardColumns>
+    )
+  )
+}
 
 const Notes = () => {
 
   const [notes, setNotes] = React.useState([])
+
+  const add = () => {
+
+  }
+
+  const getNotes = async () => {
+    const notes = await fetch('https://jsonplaceholder.typicode.com/posts')
+    const theNotes = await notes.json()
+    setNotes(theNotes.length > 0 ? theNotes : [])
+  }
+
   
   React.useEffect( () => {
-    const fakeFetch = () => {
-      return [
-        {
-          "id" : "445sffa",
-          "title": "Developing a react app",
-          "category": "Study",
-          "details": "Study how to use React to create apps",
-          "archived" : false
-        },
-        {
-          "id" : "425sfda",
-          "title": "Developing a react native app",
-          "category": "Work",
-          "details": "Swift gas and MobiKlinic apps",
-          "archived" : true
-        },
-        {
-          "id" : "345sfga",
-          "title": "Writing a manual",
-          "category": "Work",
-          "details": "write a Manual",
-          "archived" : false
-        }
-      ]
-    }
-
-    setNotes(fakeFetch)
+    getNotes()
 
   },[])
 
   return (
-    <div>
-      <h2>Your notes</h2>
-      <div>
-        {notes &&
-            notes.map( note => ( !note.archived && (
-                <div key={note.id}>
-                    <Link to={`/notes/${note.id}`}>
-                        <h1>{note.title}</h1>
-                    </Link>
-                    <p>{note.details}</p>
-                </div>
-                )
-                ) 
-            )
-        }
-      </div>
-      <div>
-        <AddNote />
-      </div>
-
-    </div>
+    <Row>
+        <Col sm={3}>
+          <AddNote />
+        </Col>
+        <Col sm={9}>
+          <NotesItems notes={notes} />
+        </Col>
+    </Row>
   )
 }
 
