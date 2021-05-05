@@ -22,9 +22,10 @@ const Auth = {
       localStorage.setItem('user', JSON.stringify(authenticated) )
 
       return this.getAuth() ? true : false
-    } else {
-      return false
     }
+
+    return false
+    
   },
   signout() {
     this.isAuthenticated = false

@@ -106,10 +106,9 @@ const Tasks = () => {
                                 {task.details}
                                 <div>
                                 <Button variant="danger" onClick={()=>remove(task.id)}>Delete</Button>{" "}
-                                {task.status === true ? null :<Button variant="primary" onClick={() => edit( task.id )}>Edit</Button>}
+                                {task.status === true ? null : <Button variant="primary" onClick={() => edit( task.id )}>Edit</Button>}
                                 </div>
                             </Card.Body>
-
                         </Accordion.Collapse>
                     </Card>
                 )
@@ -118,7 +117,7 @@ const Tasks = () => {
     )
 
     return (
-        <>
+        <div className="my-sm-5">
             <h1>{formTitle} Task</h1>
             <Form method="post" onSubmit={handleSubmit}>
                 <Form.Group>
@@ -141,8 +140,8 @@ const Tasks = () => {
                     <Button variant="primary" type="submit">Save</Button>
                 </Form.Group>
             </Form>
-            {taskItems}
-        </>
+            <div className="mt-sm-5">{taskItems}</div>
+        </div>
     )
 }
 

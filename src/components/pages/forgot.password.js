@@ -9,6 +9,8 @@ import {
     Error
 } from '../ui/styles'
 
+import Main from '../layouts/main'
+
 const ForgotPassword = () => {
 
     let [error,setError] = React.useState('')
@@ -24,8 +26,7 @@ const ForgotPassword = () => {
     }
 
     return (
-        <SmallContainer>
-
+        <Main classes="vcenter mx-auto" subclasses="centered-layer border border-dark" >
             <Header>Reset your password</Header>
 
             <Form method="post" onSubmit={handleSubmit}>
@@ -40,7 +41,7 @@ const ForgotPassword = () => {
                 <p>Do not have an account? <Link to="/sign-up">Sign up</Link></p>
                 <Submit type="submit" value="Reset" />
             </Form>
-        </SmallContainer>
+        </Main>
     )
 }
 

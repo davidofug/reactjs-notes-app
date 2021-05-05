@@ -19,6 +19,17 @@ export const CustomStyles = createGlobalStyle`
         background-color: ${color.success};
         color: ${color.white};
     }
+
+    .vcenter {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height:100vh;
+    }
+    .centered-layer {
+        width: 35%;
+    }
 `
 export const GlobalStyle = createGlobalStyle`
     body {
@@ -32,8 +43,7 @@ export const GlobalStyle = createGlobalStyle`
         -moz-osx-font-smoothing: grayscale;
         background: grey;
         display: flex;
-        justify-content: center;
-        align-items: center;
+        height: 100vh;
     }
     *,
     *::after,
@@ -48,10 +58,9 @@ export const GlobalStyle = createGlobalStyle`
     
     #root {
         display: flex;
-        flex:1;
-        justify-content: center;
         align-items: center;
         height: 100vh;
+        width: 100vh;
     }
 ` 
 

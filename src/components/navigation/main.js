@@ -1,5 +1,5 @@
 import React from 'react'
-import {useParams} from 'react-router-dom'
+import {Redirect, useParams} from 'react-router-dom'
 import Auth from '../config/auth'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
@@ -14,7 +14,6 @@ const MainNav = () => {
         return (
             <Navbar bg="primary" expand="lg" variant="dark">
                 <Container fluid>
-
                     <Navbar.Brand href="/">CenterX</Navbar.Brand>
 
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />

@@ -2,6 +2,7 @@ import * as React from 'react'
 import {Link,Redirect} from 'react-router-dom'
 import Auth from '../config/auth'
 import {Form, Error, Header, SmallContainer, Submit, TextInput}  from '../ui/styles'
+import Main from '../layouts/main'
 
 const SignIN = () => {
 
@@ -24,7 +25,7 @@ const SignIN = () => {
     }
 
     return isAuth == 1 ? <Redirect to={{pathname: "/notes"}} /> : 
-        <SmallContainer>
+        <Main classes="vcenter mx-auto" subclasses="centered-layer border border-dark" >
             <Header>Sign in</Header>
             <Form>
                 {error && <Error>{error}</Error>}
@@ -46,7 +47,7 @@ const SignIN = () => {
 
                 <Submit type="submit" value="Sign in" onClick={sign}/>
             </Form>
-        </SmallContainer>
+        </Main>
 }
 
 export default SignIN

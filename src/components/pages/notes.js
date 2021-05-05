@@ -1,24 +1,23 @@
 import * as React from "react"
 import AddNote from './add.note'
-import CardColumns from 'react-bootstrap/CardColumns'
-import CardDeck from 'react-bootstrap/CardDeck'
+import Container from 'react-bootstrap/Container'
 import Card from 'react-bootstrap/Card'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import { CardGroup } from "react-bootstrap"
 
 const NotesItems = ({notes}) => {
 
   return (notes.length && (
-    <CardColumns>
+    <Container className="my-sm-3">
+    <Row>
       <h1></h1>
       { 
         notes.map( note => (
+          <Col sm={6}>
         <Card
           bg='info'
           key={note.id}
           text='white'
-          style={{width:'250px'}}
           >
           <Card.Header>{note.title}</Card.Header>
           <Card.Body>
@@ -32,8 +31,10 @@ const NotesItems = ({notes}) => {
             <small>dates</small>
           </Card.Footer>
         </Card>
+        </Col>
         ))}
-    </CardColumns>
+    </Row>
+    </Container>
     )
   )
 }
@@ -43,7 +44,7 @@ const Notes = () => {
   const [notes, setNotes] = React.useState([])
 
   const add = () => {
-
+    
   }
 
   const getNotes = async () => {

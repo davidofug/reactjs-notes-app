@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { Link } from 'react-router-dom'
-import {Form, Error, Success, Submit, TextInput, Header, SmallContainer } from '../ui/styles'
+import {Form, Error, Success, Submit, TextInput, Header} from '../ui/styles'
+import Main from '../layouts/main'
 
 const SignUP = () => {
 
@@ -52,10 +53,8 @@ const SignUP = () => {
     }
 
     return (
-        <SmallContainer>
-
+        <Main classes="vcenter mx-auto" subclasses="centered-layer border border-dark" >
             <Header>Register</Header>
-
             <Form method="post" onSubmit={handleSubmit}>
                 {errors.length > 0 && <Error>{errors}</Error>}
                 {success.length > 0 && <Success>{success}</Success>}
@@ -89,7 +88,7 @@ const SignUP = () => {
                 <p>Have an account? <Link to="/sign-in">Sign in</Link></p>
                 <Submit type="submit" value="Register" />
             </Form>
-        </SmallContainer>
+        </Main>
     )
 }
 
