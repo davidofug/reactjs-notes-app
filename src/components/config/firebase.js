@@ -1,9 +1,5 @@
-<!-- The core Firebase JS SDK is always required and must be listed first -->
-<script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-app.js"></script>
-import firebase from 'firebase'
 
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+import firebase from 'firebase'
 const firebaseConfig = {
     apiKey: "AIzaSyAKNM7Vu6B_T-fMOG1c36olKPEJi07hsFU",
     authDomain: "notes-b97a9.firebaseapp.com",
